@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { HomePage } from './Components/pages/home-page';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { PokeDetailsPage } from './Components/pages/poke-details-page';
+import { QueryClient } from 'react-query';
+import { QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <>
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<HomePage/>}/>
+      <Route path='/pokemon/:id' element={<PokeDetailsPage/>}/>
+    </Routes>
+    </BrowserRouter>
+    </QueryClientProvider>
+    </>;
 }
 
 export default App;
